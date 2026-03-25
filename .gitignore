@@ -12,8 +12,7 @@ dist
 dist-ssr
 *.local
 
-# 5etools data — large JSON files, see README for setup
-src/data/5etools/
+# 5etools data is committed for GH Pages deployment
 
 # Editor directories and files
 .vscode/*
