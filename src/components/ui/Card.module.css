@@ -1,0 +1,25 @@
+.card {
+  background: var(--color-surface-container-low);
+  border: 1px solid rgba(242, 202, 80, 0.12);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.pad-none { padding: 0; }
+.pad-sm { padding: 10px; }
+.pad-md { padding: 16px; }
+.pad-lg { padding: 24px; }
+
+.hover {
+  cursor: pointer;
+}
+
+.hover:hover {
+  border-color: rgba(242, 202, 80, 0.3);
+  background: var(--color-surface-container);
+}
+
+.active {
+  border-color: var(--color-primary);
+  background: rgba(242, 202, 80, 0.06);
+}

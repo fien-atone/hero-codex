@@ -1,0 +1,340 @@
+/* Wrapper: creator + detail panel side by side */
+.creatorWrap {
+  display: flex;
+  height: calc(100vh - var(--header-height) - 48px);
+  gap: 0;
+  margin: -24px;
+  padding: 0;
+}
+
+.creator {
+  flex: 1;
+  min-width: 0;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.loading {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Step indicator */
+.steps {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: var(--color-surface-container);
+  white-space: nowrap;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+
+.step.done {
+  cursor: pointer;
+  color: var(--color-secondary);
+  background: rgba(123, 214, 209, 0.08);
+  border-color: rgba(123, 214, 209, 0.15);
+}
+
+.step.active {
+  color: var(--color-on-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  font-weight: 700;
+}
+
+.stepNum {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.stepLabel {
+  font-size: 10px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.content h2 {
+  font-family: var(--font-headline);
+  margin-bottom: 4px;
+}
+
+/* Option grid */
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.optionCard {
+  position: relative;
+}
+
+.optionCard h3 {
+  font-size: 1rem;
+}
+
+.optionCard h4 {
+  font-size: 0.9rem;
+}
+
+/* Card header with info button */
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.infoBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.infoBtn:hover {
+  color: var(--color-primary);
+  background: rgba(242, 202, 80, 0.10);
+}
+
+/* Abilities */
+.abilityAssign {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 450px;
+}
+
+.abilityRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.abilityRow .abilityLabel {
+  width: 100px;
+  font-weight: 500;
+}
+
+.bonusLabel {
+  font-size: 0.85rem;
+  color: var(--color-secondary);
+  font-weight: 700;
+  width: 24px;
+}
+
+.modPreview {
+  font-weight: 700;
+  font-size: 1rem;
+  width: 36px;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.raceBonuses {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: rgba(242, 202, 80, 0.06);
+  border: 1px solid rgba(242, 202, 80, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+}
+
+/* Details form */
+.detailsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+  margin-top: 12px;
+}
+
+/* Review */
+.review h3 {
+  font-family: var(--font-headline);
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.reviewStats {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.reviewStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.reviewStat span:first-child {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.reviewStat strong {
+  font-size: 1.2rem;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.navRight {
+  display: flex;
+  gap: 8px;
+}
+
+/* === Detail panel sections === */
+.detailSection {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.detailSection:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detailLabel {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detailLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(242, 202, 80, 0.15);
+}
+
+.detailMuted {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.subItem {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.subItem:last-child {
+  border-bottom: none;
+}
+
+.subList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.subTag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-container);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+/* Level blocks for class progression */
+.levelBlock {
+  margin-bottom: 12px;
+}
+
+.levelHeader {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 6px;
+}
+
+.featureBlock {
+  margin-bottom: 8px;
+  padding-left: 10px;
+  border-left: 2px solid rgba(242, 202, 80, 0.25);
+}
+
+.featureBlock strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}

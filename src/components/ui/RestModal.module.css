@@ -1,0 +1,176 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  width: 420px;
+  animation: slideIn 0.15s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--color-primary);
+}
+
+.header h3 {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.body {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.restList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.restItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.restItem svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Hit Dice selector */
+.hdRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--color-surface-container);
+  border-radius: var(--radius-sm);
+}
+
+.hdLabel {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-primary);
+  width: 36px;
+}
+
+.hdAvail {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hdControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hdBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-container-low);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.hdBtn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.hdBtn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.hdCount {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+/* Roll result */
+.rollResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 0;
+}
+
+.healedLabel {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.healedValue {
+  font-family: var(--font-headline);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  line-height: 1;
+}
+
+.healedTotal {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

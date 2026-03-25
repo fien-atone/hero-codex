@@ -1,0 +1,280 @@
+/* === Arcane Ledger-inspired Design System === */
+
+:root,
+[data-theme='dark'] {
+  /* ── Surface hierarchy ── */
+  --color-background:              #121317;
+  --color-surface:                 #121317;
+  --color-surface-dim:             #121317;
+  --color-surface-bright:          #38393e;
+  --color-surface-container-lowest:#0d0e12;
+  --color-surface-container-low:   #1a1b20;
+  --color-surface-container:       #1f1f24;
+  --color-surface-container-high:  #292a2e;
+  --color-surface-container-highest:#343439;
+  --color-surface-variant:         #343439;
+
+  /* ── Primary (Aged Gold) ── */
+  --color-primary:                 #f2ca50;
+  --color-primary-container:       #d4af37;
+  --color-primary-dim:             #e9c349;
+  --color-on-primary:              #3c2f00;
+  --color-on-primary-container:    #554300;
+
+  /* ── Secondary (Teal) ── */
+  --color-secondary:               #7bd6d1;
+  --color-secondary-container:     #007774;
+  --color-on-secondary:            #003735;
+
+  /* ── Tertiary (Violet) ── */
+  --color-tertiary:                #d0c8ff;
+  --color-tertiary-container:      #b3a8ff;
+  --color-on-tertiary:             #2d128f;
+
+  /* ── Error ── */
+  --color-error:                   #ffb4ab;
+  --color-error-container:         #93000a;
+  --color-on-error:                #690005;
+
+  /* ── On-colors ── */
+  --color-on-background:           #e3e2e8;
+  --color-on-surface:              #e3e2e8;
+  --color-on-surface-variant:      #d0c5af;
+
+  /* ── Outline ── */
+  --color-outline:                 #99907c;
+  --color-outline-variant:         #4d4635;
+
+  /* ── Mapped to our CSS var names ── */
+  --bg-primary: var(--color-background);
+  --bg-secondary: var(--color-surface-container-low);
+  --bg-tertiary: var(--color-surface-container);
+  --bg-hover: var(--color-surface-container-high);
+  --bg-active: var(--color-surface-container-highest);
+  --bg-sidebar: var(--color-surface-container-low);
+
+  --text-primary: var(--color-on-surface);
+  --text-secondary: var(--color-on-surface-variant);
+  --text-muted: #6b6f7b;
+  --text-inverse: var(--color-on-primary);
+
+  --border-color: rgba(77, 70, 53, 0.25);
+  --border-light: rgba(77, 70, 53, 0.10);
+
+  --accent: var(--color-primary);
+  --accent-hover: var(--color-primary-dim);
+  --accent-light: rgba(242, 202, 80, 0.10);
+  --accent-text: var(--color-on-primary);
+
+  --danger: var(--color-error);
+  --danger-light: rgba(255, 180, 171, 0.10);
+  --success: var(--color-secondary);
+  --success-light: rgba(123, 214, 209, 0.10);
+  --warning: #f59e0b;
+  --warning-light: rgba(245, 158, 11, 0.10);
+  --info: var(--color-tertiary);
+  --info-light: rgba(208, 200, 255, 0.10);
+
+  --gold: var(--color-primary);
+  --gold-light: rgba(242, 202, 80, 0.10);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+  /* Sharp precision — minimal radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 10px;
+  --radius-full: 9999px;
+
+  --sidebar-width: 280px;
+  --header-height: 56px;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Georgia', 'Noto Serif', serif;
+  --font-headline: 'Georgia', 'Noto Serif', serif;
+  --font-label: 'Inter', system-ui, sans-serif;
+}
+
+[data-theme='light'] {
+  --color-background:              #f5f3ee;
+  --color-surface:                 #f5f3ee;
+  --color-surface-container-lowest:#ffffff;
+  --color-surface-container-low:   #fffcf5;
+  --color-surface-container:       #f0ece3;
+  --color-surface-container-high:  #e8e4db;
+  --color-surface-container-highest:#d4d0c7;
+  --color-surface-variant:         #e8e4db;
+
+  --color-primary:                 #8b6914;
+  --color-primary-container:       #c49a1a;
+  --color-primary-dim:             #a37d18;
+  --color-on-primary:              #ffffff;
+
+  --color-secondary:               #00706d;
+  --color-on-secondary:            #ffffff;
+
+  --color-tertiary:                #5b44b9;
+  --color-on-tertiary:             #ffffff;
+
+  --color-error:                   #ba1a1a;
+  --color-on-error:                #ffffff;
+
+  --color-on-background:           #1c1b1f;
+  --color-on-surface:              #1c1b1f;
+  --color-on-surface-variant:      #4d4635;
+
+  --color-outline:                 #7d7567;
+  --color-outline-variant:         #cec5b4;
+
+  --bg-primary: var(--color-background);
+  --bg-secondary: var(--color-surface-container-low);
+  --bg-tertiary: var(--color-surface-container);
+  --bg-hover: var(--color-surface-container-high);
+  --bg-active: var(--color-surface-container-highest);
+  --bg-sidebar: var(--color-surface-container-low);
+
+  --text-primary: var(--color-on-surface);
+  --text-secondary: var(--color-on-surface-variant);
+  --text-muted: #7d7567;
+  --text-inverse: var(--color-on-primary);
+
+  --border-color: rgba(206, 197, 180, 0.5);
+  --border-light: rgba(206, 197, 180, 0.25);
+
+  --accent: var(--color-primary);
+  --accent-hover: var(--color-primary-dim);
+  --accent-light: rgba(139, 105, 20, 0.08);
+  --accent-text: var(--color-on-primary);
+
+  --danger: var(--color-error);
+  --danger-light: rgba(186, 26, 26, 0.08);
+  --success: var(--color-secondary);
+  --success-light: rgba(0, 112, 109, 0.08);
+  --info: var(--color-tertiary);
+  --info-light: rgba(91, 68, 185, 0.08);
+
+  --gold: var(--color-primary);
+  --gold-light: rgba(139, 105, 20, 0.08);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* === Reset & Base === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+h1 { font-family: var(--font-headline); font-size: 1.75rem; }
+h2 { font-family: var(--font-headline); font-size: 1.4rem; }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
+
+/* === Label style (arcane-ledger signature) === */
+.label {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* === Utility Classes === */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-xs { gap: 4px; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 12px; }
+.gap-lg { gap: 16px; }
+.gap-xl { gap: 24px; }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

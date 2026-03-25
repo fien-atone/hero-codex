@@ -1,0 +1,76 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.sm { padding: 3px 8px; font-size: 9px; }
+.md { padding: 4px 12px; font-size: 10px; }
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Colors — arcane-ledger pill style */
+.default {
+  background: var(--color-surface-container);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+.default.active, .clickable.default:hover {
+  background: var(--color-surface-container-high);
+  color: var(--text-primary);
+}
+
+.accent {
+  background: rgba(242, 202, 80, 0.10);
+  color: var(--color-primary);
+  border-color: rgba(242, 202, 80, 0.20);
+}
+
+.gold {
+  background: rgba(242, 202, 80, 0.10);
+  color: var(--color-primary);
+  border-color: rgba(242, 202, 80, 0.20);
+}
+
+.success {
+  background: rgba(123, 214, 209, 0.10);
+  color: var(--color-secondary);
+  border-color: rgba(123, 214, 209, 0.20);
+}
+
+.danger {
+  background: rgba(255, 180, 171, 0.10);
+  color: var(--color-error);
+  border-color: rgba(255, 180, 171, 0.20);
+}
+
+.info {
+  background: rgba(208, 200, 255, 0.10);
+  color: var(--color-tertiary);
+  border-color: rgba(208, 200, 255, 0.20);
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.6;
+}
+
+.remove:hover {
+  opacity: 1;
+}

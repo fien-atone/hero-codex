@@ -1,0 +1,191 @@
+.editor {
+  max-width: 900px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header h2 {
+  flex: 1;
+  font-family: var(--font-headline);
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+.sectionTitle {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(242, 202, 80, 0.15);
+}
+
+.grid1 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.classRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.abilityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.abilityEdit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.abilityEdit label {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.modDisplay {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.fieldLabel {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-container-low);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.tagEditor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.tagInput {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.miniInput {
+  padding: 3px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-container-low);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  width: 80px;
+}
+
+.miniInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.addTagBtn {
+  background: var(--color-surface-container);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+
+.addTagBtn:hover {
+  background: var(--color-surface-container-high);
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid3 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .abilityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
