@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { Swords, Sun, Moon, PanelLeftClose, PanelLeft, Download, Upload } from 'lucide-react';
+import { Swords, Sun, Moon, PanelLeftClose, PanelLeft, Download, Upload, Languages } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { useUIStore } from '../stores/uiStore';
+import { useI18n } from '../i18n';
 import { useCharacterStore } from '../stores/characterStore';
 import { exportCharacters, importCharacters, downloadAsFile, readFileAsText } from '../utils/export-import';
 import styles from './Header.module.css';
@@ -9,6 +10,7 @@ import styles from './Header.module.css';
 export function Header() {
   const navigate = useNavigate();
   const { theme, toggleTheme, sidebarOpen, toggleSidebar } = useUIStore();
+  const { locale, toggleLocale } = useI18n();
   const { characters, importCharacters: storeImport } = useCharacterStore();
 
   const handleExport = () => {
@@ -51,6 +53,15 @@ export function Header() {
       </div>
 
       <div className={styles.right}>
+        <Button
+          variant="ghost"
+          size="sm"
+          icon={<Languages size={16} />}
+          onClick={toggleLocale}
+          title={locale === 'en' ? 'Переключить на русский' : 'Switch to English'}
+        >
+          {locale.toUpperCase()}
+        </Button>
         <Button variant="ghost" size="sm" icon={<Download size={16} />} onClick={handleExport} title="Export all" />
         <Button variant="ghost" size="sm" icon={<Upload size={16} />} onClick={handleImport} title="Import" />
         <Button
