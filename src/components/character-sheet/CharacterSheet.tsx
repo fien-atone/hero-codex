@@ -23,6 +23,8 @@ import { useDiceStore } from '../../stores/diceStore';
 import { RollModal, type RollRequest } from '../ui/RollModal';
 import { RestModal } from '../ui/RestModal';
 import { capitalize, formatSpeed, formatAbilityBonuses } from '../../utils/formatters';
+import { useT } from '../../i18n';
+import { useGL } from '../../i18n/gamedata';
 import styles from './CharacterSheet.module.css';
 
 type DetailView = { type: string; title: string; subtitle?: string; badges?: Array<{ label: string }>; entries: Entry[]; } | null;
@@ -38,6 +40,9 @@ export function CharacterSheet() {
   const [rollRequest, setRollRequest] = useState<RollRequest | null>(null);
   const [restType, setRestType] = useState<'short' | 'long' | null>(null);
   const [avatarPreview, setAvatarPreview] = useState(false);
+
+  const tt = useT();
+  const gl = useGL();
 
   const [raceData, setRaceData] = useState<Race | null>(null);
   const [classFeatures, setClassFeatures] = useState<ClassFeatureData[]>([]);
@@ -114,10 +119,10 @@ export function CharacterSheet() {
 
   // ── Tabs config ──
   const tabs = [
-    { id: 'main', label: 'Main', icon: <Target size={14} /> },
-    { id: 'spells', label: 'Spellcasting', icon: <Zap size={14} />, hidden: !char.spellcasting },
-    { id: 'inventory', label: 'Inventory', icon: <Backpack size={14} /> },
-    { id: 'story', label: 'Story', icon: <ScrollText size={14} /> },
+    { id: 'main', label: tt('tab.main'), icon: <Target size={14} /> },
+    { id: 'spells', label: tt('tab.spellcasting'), icon: <Zap size={14} />, hidden: !char.spellcasting },
+    { id: 'inventory', label: tt('tab.inventory'), icon: <Backpack size={14} /> },
+    { id: 'story', label: tt('tab.story'), icon: <ScrollText size={14} /> },
   ];
 
   return (
@@ -161,16 +166,16 @@ export function CharacterSheet() {
             </p>
             <div className={styles.tags}>
               {char.campaign && <Tag label={char.campaign} color="accent" />}
-              <Tag label={char.race.subrace || char.race.name} color="info" onClick={raceData ? showRaceDetail : undefined} />
-              <Tag label={char.alignment} color="default" />
-              <Tag label={char.background.name} color="gold" onClick={backgroundData?.entries ? showBackgroundDetail : undefined} />
+              <Tag label={gl('race', char.race.subrace || char.race.name)} color="info" onClick={raceData ? showRaceDetail : undefined} />
+              <Tag label={gl('alignment', char.alignment)} color="default" />
+              <Tag label={gl('background', char.background.name)} color="gold" onClick={backgroundData?.entries ? showBackgroundDetail : undefined} />
             </div>
           </div>
 
           <div className={styles.headerActions}>
-            <Button variant="ghost" size="sm" icon={<Sun size={14} />} onClick={() => setRestType('short')} title="Short Rest">Short Rest</Button>
-            <Button variant="ghost" size="sm" icon={<Moon size={14} />} onClick={() => setRestType('long')} title="Long Rest">Long Rest</Button>
-            <Button variant="secondary" size="sm" icon={<Pencil size={14} />} onClick={() => navigate(`/character/${char.id}/edit`)}>Edit</Button>
+            <Button variant="ghost" size="sm" icon={<Sun size={14} />} onClick={() => setRestType('short')}>{tt('action.shortRest')}</Button>
+            <Button variant="ghost" size="sm" icon={<Moon size={14} />} onClick={() => setRestType('long')}>{tt('action.longRest')}</Button>
+            <Button variant="secondary" size="sm" icon={<Pencil size={14} />} onClick={() => navigate(`/character/${char.id}/edit`)}>{tt('action.edit')}</Button>
           </div>
         </div>
 
@@ -191,22 +196,22 @@ export function CharacterSheet() {
                 <Sparkles size={18} />
               </div>
               <div className={styles.coreValue} style={char.heroicInspiration ? {} : { opacity: 0.3 }}>{char.heroicInspiration ? 'Yes' : 'No'}</div>
-              <div className={styles.coreLabel}>Inspiration</div>
+              <div className={styles.coreLabel}>{tt('stat.inspiration')}</div>
             </Card>
             <Card className={styles.coreStat}>
               <div className={styles.coreIcon}><Dices size={18} /></div>
               <div className={styles.coreValue}>+{profBonus}</div>
-              <div className={styles.coreLabel}>Proficiency</div>
+              <div className={styles.coreLabel}>{tt('stat.proficiency')}</div>
             </Card>
             <Card className={`${styles.coreStat} ${styles.rollable}`} onClick={rollInitiative} title="Roll Initiative">
               <div className={styles.coreIcon}><Swords size={18} /></div>
               <div className={styles.coreValue}>{formatModifier(initiative.total)}</div>
-              <div className={styles.coreLabel}>Initiative</div>
+              <div className={styles.coreLabel}>{tt('stat.initiative')}</div>
             </Card>
             <Card className={styles.coreStat}>
               <div className={styles.coreIcon}><Shield size={18} /></div>
               <div className={styles.coreValue}>{char.armorClass}</div>
-              <div className={styles.coreLabel}>AC</div>
+              <div className={styles.coreLabel}>{tt('stat.ac')}</div>
             </Card>
             <Card className={styles.coreStatWide}>
               <div className={styles.coreIcon}><Heart size={18} /></div>
@@ -246,14 +251,14 @@ export function CharacterSheet() {
             <Card className={styles.coreStat}>
               <div className={styles.coreIcon}><Footprints size={18} /></div>
               <div className={styles.coreValue}>{Object.entries(char.speed).map(([t, v]) => t === 'walk' ? `${v}ft` : `${t} ${v}ft`).join(', ')}</div>
-              <div className={styles.coreLabel}>Speed</div>
+              <div className={styles.coreLabel}>{tt('stat.speed')}</div>
             </Card>
           </div>
           <div className={styles.columns3}>
             {/* ── Col 1: Abilities, Saves, Proficiencies ── */}
             <div className={styles.col}>
               <Card>
-                <SectionHeader icon={<Target size={14} />} title="Ability Scores" />
+                <SectionHeader icon={<Target size={14} />} title={tt('section.abilityScores')} />
                 <div className={styles.abilityGrid}>
                   {ABILITY_KEYS.map((key) => {
                     const score = getEffectiveAbilityScore(char, key);
@@ -269,7 +274,7 @@ export function CharacterSheet() {
               </Card>
 
               <Card>
-                <SectionHeader icon={<Shield size={14} />} title="Saving Throws" />
+                <SectionHeader icon={<Shield size={14} />} title={tt('section.savingThrows')} />
                 <div className={styles.saveList}>
                   {ABILITY_KEYS.map((key) => {
                     const save = getSavingThrowModifier(char, key);
@@ -278,7 +283,7 @@ export function CharacterSheet() {
                       <div key={key} className={`${styles.saveRow} ${prof ? styles.proficient : ''} ${styles.rollable}`} onClick={() => rollSave(key)}>
                         <span className={styles.profDot}>{prof ? '\u25C9' : '\u25CB'}</span>
                         <span className={styles.saveValue}>{formatModifier(save.total)}</span>
-                        <span className={styles.saveName}>{ABILITY_NAMES[key]}</span>
+                        <span className={styles.saveName}>{gl('ability', key)}</span>
                       </div>
                     );
                   })}
@@ -286,7 +291,7 @@ export function CharacterSheet() {
               </Card>
 
               <Card>
-                <SectionHeader icon={<Languages size={14} />} title="Proficiencies" />
+                <SectionHeader icon={<Languages size={14} />} title={tt('section.proficiencies')} />
                 <div className={styles.profSection}>
                   {char.proficiencies.armor.length > 0 && <div><strong>Armor:</strong> {char.proficiencies.armor.join(', ')}</div>}
                   {char.proficiencies.weapons.length > 0 && <div><strong>Weapons:</strong> {char.proficiencies.weapons.join(', ')}</div>}
@@ -299,35 +304,35 @@ export function CharacterSheet() {
             {/* ── Col 2: Senses + Skills ── */}
             <div className={styles.col}>
               <Card>
-                <SectionHeader icon={<Eye size={14} />} title="Senses" />
+                <SectionHeader icon={<Eye size={14} />} title={tt('section.senses')} />
                 <div className={styles.sensesList}>
                   <div className={styles.senseRow}>
-                    <span className={styles.senseLabel}>Passive Perception</span>
+                    <span className={styles.senseLabel}>{tt('stat.passivePerception')}</span>
                     <span className={styles.senseValue}>{passivePerception.total}</span>
                   </div>
                   <div className={styles.senseRow}>
-                    <span className={styles.senseLabel}>Passive Insight</span>
+                    <span className={styles.senseLabel}>{tt('stat.passiveInsight')}</span>
                     <span className={styles.senseValue}>{10 + getSkillModifier(char, 'insight').total}</span>
                   </div>
                   <div className={styles.senseRow}>
-                    <span className={styles.senseLabel}>Passive Investigation</span>
+                    <span className={styles.senseLabel}>{tt('stat.passiveInvestigation')}</span>
                     <span className={styles.senseValue}>{10 + getSkillModifier(char, 'investigation').total}</span>
                   </div>
                   {raceData?.darkvision ? (
                     <div className={styles.senseRow}>
-                      <span className={styles.senseLabel}>Darkvision</span>
+                      <span className={styles.senseLabel}>{tt('stat.darkvision')}</span>
                       <span className={styles.senseValue}>{raceData.darkvision} ft</span>
                     </div>
                   ) : (
                     <div className={styles.senseRow}>
-                      <span className={styles.senseLabel}>Normal Vision</span>
+                      <span className={styles.senseLabel}>{tt('stat.normalVision')}</span>
                       <span className={styles.senseValue}></span>
                     </div>
                   )}
                 </div>
               </Card>
               <Card>
-                <SectionHeader icon={<Sparkles size={14} />} title="Skills" />
+                <SectionHeader icon={<Sparkles size={14} />} title={tt('section.skills')} />
                 <div className={styles.skillList}>
                   {Object.entries(SKILLS).sort().map(([skill, ability]) => {
                     const result = getSkillModifier(char, skill);
@@ -337,7 +342,7 @@ export function CharacterSheet() {
                       <div key={skill} className={`${styles.skillRow} ${prof ? styles.proficient : ''} ${styles.rollable}`} onClick={() => rollSkill(skill)}>
                         <span className={styles.profDot}>{expert ? '\u25C9\u25C9' : prof ? '\u25C9' : '\u25CB'}</span>
                         <span className={styles.skillValue}>{formatModifier(result.total)}</span>
-                        <span className={styles.skillName}>{capitalize(skill)}</span>
+                        <span className={styles.skillName}>{gl('skill', skill)}</span>
                         <span className={styles.skillAbility}>{ability.toUpperCase()}</span>
                       </div>
                     );
@@ -350,7 +355,7 @@ export function CharacterSheet() {
             <div className={styles.col}>
               {/* Class Features — first, most important */}
               <Card>
-                <SectionHeader icon={<BookOpen size={14} />} title={`${char.classes[0]?.name || 'Class'} Features`} />
+                <SectionHeader icon={<BookOpen size={14} />} title={`${gl('class', char.classes[0]?.name || 'Class')} — ${tt('section.features')}`} />
                 <div className={styles.featureList}>
                   {classFeatures.length > 0
                     ? classFeatures.map((f, i) => {
@@ -362,9 +367,9 @@ export function CharacterSheet() {
                             onClick={() => setExpandedFeatures((prev) => { const n = new Set(prev); isOpen ? n.delete(i) : n.add(i); return n; })}>
                             <div className={styles.featureName}>
                               <span className={styles.featureChevron}>{isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                              {f.name}
-                              {isSubclass && <span className={styles.subclassBadge}>{subName}</span>}
-                              <span className={styles.featureLevel}>Lvl {f.level}</span>
+                              {gl('feature', f.name)}
+                              {isSubclass && <span className={styles.subclassBadge}>{gl('subclass', subName)}</span>}
+                              <span className={styles.featureLevel}>{tt('misc.level')} {f.level}</span>
                             </div>
                             {isOpen && f.entries && (
                               <div className={styles.featureBody} onClick={(e) => e.stopPropagation()}>
@@ -381,7 +386,7 @@ export function CharacterSheet() {
                             onClick={() => setExpandedFeatures((prev) => { const n = new Set(prev); isOpen ? n.delete(i) : n.add(i); return n; })}>
                             <div className={styles.featureName}>
                               <span className={styles.featureChevron}>{isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                              {f.name}
+                              {gl('feature', f.name)}
                             </div>
                             {isOpen && (
                               <div className={styles.featureBody}>
@@ -406,7 +411,7 @@ export function CharacterSheet() {
                             onClick={() => setExpandedFeatures((prev) => { const n = new Set(prev); isOpen ? n.delete(featIdx) : n.add(featIdx); return n; })}>
                             <div className={styles.featureName}>
                               <span className={styles.featureChevron}>{isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                              {feat.name}
+                              {gl('feature', feat.name)}
                               {featData?.ability && (
                                 <span className={styles.featureLevel}>
                                   {featData.ability.map((a) => Object.entries(a).map(([k, v]) => `${k.toUpperCase()} +${v}`).join(', ')).join('; ')}
@@ -439,7 +444,7 @@ export function CharacterSheet() {
               {/* Race Traits */}
               {raceData?.entries && raceData.entries.filter((e): e is { type: string; name: string; entries: Entry[] } => typeof e === 'object' && 'name' in e).length > 0 && (
                 <Card>
-                  <SectionHeader icon={<User size={14} />} title={`${raceData.name} Traits`} />
+                  <SectionHeader icon={<User size={14} />} title={`${gl('race', raceData.name)} — ${tt('misc.traits')}`} />
                   <div className={styles.featureList}>
                     {raceData.entries.filter((e): e is { type: string; name: string; entries: Entry[] } => typeof e === 'object' && 'name' in e).map((trait, i) => {
                       const rIdx = 20000 + i;
@@ -449,7 +454,7 @@ export function CharacterSheet() {
                           onClick={() => setExpandedFeatures((prev) => { const n = new Set(prev); isOpen ? n.delete(rIdx) : n.add(rIdx); return n; })}>
                           <div className={styles.featureName}>
                             <span className={styles.featureChevron}>{isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                            {trait.name}
+                            {gl('feature', trait.name)}
                             <span className={styles.raceBadge}>{raceData!.name}</span>
                           </div>
                           {isOpen && trait.entries && (
@@ -560,7 +565,7 @@ export function CharacterSheet() {
 
               {/* Spell Slots */}
               <Card style={{ marginBottom: 16 }}>
-                <SectionHeader icon={<Dices size={14} />} title="Spell Slots" />
+                <SectionHeader icon={<Dices size={14} />} title={tt('section.spellSlots')} />
                 <div className={styles.slots}>
                   {Object.entries(sc.slots).filter(([, s]) => s.total > 0).map(([lvl, slot]) => (
                     <div key={lvl} className={styles.slotRow}>
@@ -605,7 +610,7 @@ export function CharacterSheet() {
                                 />
                               )}
                               <span style={!canPrepare || lvl === 0 || spell.prepared ? {} : { opacity: 0.4 }}>
-                                {spell.name}
+                                {gl('spell', spell.name)}
                               </span>
                             </span>
                             <span className={styles.spellActions}>
@@ -657,7 +662,7 @@ export function CharacterSheet() {
             <div>
               {/* Currency — on top */}
               <Card style={{ marginBottom: 16 }}>
-                <SectionHeader icon={<Coins size={14} />} title="Currency" />
+                <SectionHeader icon={<Coins size={14} />} title={tt('section.currency')} />
                 <div className={styles.currencyGrid}>
                   {(['pp', 'gp', 'ep', 'sp', 'cp'] as const).map((coin) => (
                     <div key={coin} className={styles.coinBox}>
@@ -670,7 +675,7 @@ export function CharacterSheet() {
 
               {/* Carrying Capacity */}
               <Card style={{ marginBottom: 16 }}>
-                <SectionHeader icon={<Weight size={14} />} title="Carrying Capacity" />
+                <SectionHeader icon={<Weight size={14} />} title={tt('section.carryingCapacity')} />
                 <div className={styles.weightBar}>
                   <div className={styles.weightFill} style={{ width: `${weightPct}%`, background: encumbered ? 'var(--color-error)' : 'var(--color-primary)' }} />
                 </div>

@@ -4,6 +4,8 @@ import { useCharacterStore } from '../../stores/characterStore';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { getCharacterLevel } from '../../types/character';
+import { useGL } from '../../i18n/gamedata';
+import { useT } from '../../i18n';
 import styles from './Sidebar.module.css';
 
 export function Sidebar() {
@@ -11,6 +13,8 @@ export function Sidebar() {
   const location = useLocation();
   const { filters, setFilter, getFilteredCharacters } = useCharacterStore();
 
+  const tt = useT();
+  const gl = useGL();
   const chars = getFilteredCharacters();
 
   // Sort: favorites first, then alphabetical
@@ -25,7 +29,7 @@ export function Sidebar() {
       {/* Search + Add */}
       <div className={styles.top}>
         <Input
-          placeholder="Search..."
+          placeholder={tt('misc.search')}
           icon={<Search size={14} />}
           value={filters.search}
           onChange={(e) => setFilter({ search: e.target.value })}
@@ -56,7 +60,7 @@ export function Sidebar() {
                   {char.name}
                 </span>
                 <span className={styles.charMeta}>
-                  Lvl {level} {char.race.subrace || char.race.name} {char.classes[0]?.name}
+                  Lvl {level} {gl('race', char.race.subrace || char.race.name)} {gl('class', char.classes[0]?.name || '')}
                 </span>
               </div>
             </button>
